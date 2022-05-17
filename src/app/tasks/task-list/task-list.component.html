@@ -6,12 +6,12 @@
 </button>
 
 <section>
-    <div *ngIf="jobs.length == 0" class="alert alert-warning" role="alert">
+    <div *ngIf="tasks.length == 0" class="alert alert-warning" role="alert">
         Nenhuma terefa foi cadastrada ainda.
     </div>
 
-    <ul class="list-group" *ngIf="jobs.length > 0" >
-        <li class="list-group-item" *ngFor="let task of jobs">
+    <ul class="list-group" *ngIf="tasks.length > 0" >
+        <li class="list-group-item" *ngFor="let task of tasks">
             <app-task-list-item [task]="task" class="task-item" (onDeleteTask)="onTaskDeleted($event)"></app-task-list-item>
         </li>
     </ul>

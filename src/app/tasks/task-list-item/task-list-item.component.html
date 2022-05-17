@@ -1,0 +1,5 @@
+<div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" [(ngModel)]="task.completed" (change)="onCompletedCheckChange(task)" />
+</div>
+<div [innerHTML]="task.name" class="task-item-description" [ngClass]="task.inOperation ? '' : 'task-completed'">
+</div>

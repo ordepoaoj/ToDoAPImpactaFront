@@ -1,4 +1,4 @@
-import { jobservice } from './../shared/task.service';
+import { TaskService } from './../shared/task.service';
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../shared/task';
 
@@ -8,20 +8,20 @@ import { Task } from '../shared/task';
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  jobs: Task[] = [];
+  tasks: Task[] = [];
 
-  constructor(private jobservice: jobservice) { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
-    this.jobservice.getAll().subscribe(jobs => {
-      this.jobs = jobs;
+    this.taskService.getAll().subscribe(tasks => { 
+      this.tasks = tasks;
     });
   }
 
   onTaskDeleted(task: Task) {
     if (task) {
-      const index = this.jobs.findIndex((taskItem) => taskItem._id == task._id);
-      this.jobs.splice(index, 1);
+      const index = this.tasks.findIndex((taskItem) => taskItem._id == task._id);
+      this.tasks.splice(index, 1);
     }
   }
 }

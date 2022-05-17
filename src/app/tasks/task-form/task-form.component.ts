@@ -1,4 +1,4 @@
-import { jobservice } from './../shared/task.service';
+import { TaskService } from './../shared/task.service';
 import { Component, OnInit } from '@angular/core';
 import { Task } from '../shared/task';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,17 +11,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TaskFormComponent implements OnInit {
   task: Task = new Task();
   title: string = 'Nova tarefa';
-
+  
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private jobservice: jobservice
+    private taskService: TaskService
   ) { }
 
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     if (id) {
-      this.jobservice.getById(id).subscribe(task => {
+      this.taskService.getById(id).subscribe(task => {
         this.task = task;
         this.title = 'Alterando tarefa';
       });
@@ -29,7 +29,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   onSubmit() {
-    this.jobservice.save(this.task).subscribe(task => {
+    this.taskService.save(this.task).subscribe(task => {
       console.log(task);
       this.router.navigate(['']);
     });

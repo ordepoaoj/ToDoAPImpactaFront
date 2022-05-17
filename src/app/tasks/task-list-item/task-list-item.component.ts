@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Task } from '../shared/task';
-import { jobservice } from '../shared/task.service';
+import { TaskService } from '../shared/task.service';
 
 @Component({
   selector: 'app-task-list-item',
@@ -13,20 +13,20 @@ export class TaskListItemComponent implements OnInit {
 
   @Output()
   onDeleteTask = new EventEmitter()
-
-  constructor(private jobservice: jobservice) { }
+  
+  constructor(private taskService: TaskService) { }
 
   ngOnInit() {
   }
 
   remove(task: Task) {
-    this.jobservice.delete(task._id).subscribe(() => {
+    this.taskService.delete(task._id).subscribe(() => {
       this.onDeleteTask.emit(task);
     });
   }
 
   onCompletedCheckChange(task: Task) {
-    this.jobservice.save(task).subscribe(task => {
+    this.taskService.save(task).subscribe(task => {
       console.log(task);
     });
   }
